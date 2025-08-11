@@ -1,44 +1,44 @@
-import React from 'react'
+import React from "react";
+import FeatureCard from "./FeatureCard";
+import { Brain, Book, Dumbbell, User } from "lucide-react";
 
-const Hero = () => {
+export default function Hero() {
     return (
-        <div className='flex flex-row'>
-            <h1 className='text-4xl text-white flex flex-col gap-2'>
-                Express Yourself
-                <span>
-                    Anonomously with 
-                </span>
-                UNMUTE!
-            </h1>
-            <div className='text-white flex flex-col gap-30 ml-50 text-2xl '>
-                <div className='flex flex-row gap-25 '>
-                    <div>
-                        <button>
-                        AI Features
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                        Journaling
-                        </button>
-                    </div>
-                </div>
-                <div className='flex flex-row gap-25'>
-                    <div>
-                        <button>
-                        Excercise
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                        Personal Touch
-                        </button>
-                    </div>
-                </div>
-
+        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8  ">
+            <div className="flex flex-col gap-10" >
+                <FeatureCard
+                    className="bg-purple-900/10 text-white"
+                    title="AI Assistant"
+                    description="Get intelligent suggestions and insights instantly."
+                    icon={Brain}
+                    color="ai"
+                />
+                <FeatureCard
+                 className="bg-purple-900/10 text-white"
+                    title="Journal"
+                    description="Keep track of your thoughts and experiences."
+                    icon={Book}
+                    color="journal"
+                />
+            </div>
+            <div className="flex flex-col gap-10">
+                <FeatureCard
+                 className="bg-purple-900/10 text-white"
+                    title="Exercise"
+                    description="Plan and monitor your workouts effectively."
+                    icon={Dumbbell}
+                    color="exercise"
+                />
+                <FeatureCard
+                 className="bg-purple-900/10 text-white"
+                    title="Personal"
+                    description="Customize and manage your profile with ease."
+                    icon={User}
+                    color="personal"
+                />
             </div>
         </div>
-    )
+    );
 }
 
-export default Hero
+
