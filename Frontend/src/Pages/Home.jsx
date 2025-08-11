@@ -1,6 +1,7 @@
 import React from 'react'
 import Nav from '../Components/Nav'
 import Footer from '../Components/Footer'
+import Content from '../Components/ContentHome/Content'
 const Home = () => {
     return (
         <div className='flex flex-col h-[100vh] w-full bg-zinc-900 '>
@@ -9,7 +10,7 @@ const Home = () => {
                     <Nav />
                 </div>
                 <div>
-                    Content
+                   <Content />
                 </div>
             </div>
             <div>
