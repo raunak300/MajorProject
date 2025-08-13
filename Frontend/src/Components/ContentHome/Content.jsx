@@ -3,6 +3,7 @@ import Hero from "./Content/Hero";
 import ClickBar from "../ClickBar";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
+
 export default function Content() {
   return (
     <main className="flex flex-col text-white w-full">
@@ -10,7 +11,7 @@ export default function Content() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center py-15 px-6 bg-gradient-to-b from-purple-900/40 to-zinc-850">
         <div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold  mt-2.5">
             Express Yourself <br />
             Anonymously with <br />
             <span className="block text-purple-300 mt-3 typing"> UNMUTE!</span>
