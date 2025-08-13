@@ -8,17 +8,18 @@ const Nav = () => {
     const [run, setrun] = useState(false)
     const [open, setOpen] = useState(false)
     return (
-        <div className='flex md:h-[10vh] w-full flex-row justify-between  bg-black text-white items-center' >
-            <div className="font-atma text-2xl ">
+        <div className=' flex md:h-[10vh] w-full items-center  bg-black text-white fixed top-0 left-0 z-50
+' >
+            <div className="font-atma text-2xl pl-4">
                    🎙️ UNMUTE
                 
 
             </div>
-            <div className='flex flex-row gap-10 '>
+            <div className='hidden lg:flex absolute left-1/2 transform -translate-x-1/2 flex-row gap-10 '>
                 <Link to={{ pathname: '/' }} className='hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] transition duration-300'>Home</Link>
                 <Link to={{ pathname: '/' }} className='hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] transition duration-300'>About Us</Link>
             </div>
-            <div className='flex flex-row  gap-8'>
+            <div className='ml-auto flex flex-row  gap-8 pr-4'>
                 <div className='flex flex-row gap-4 items-center '>
                     <input type="text" className='border-0 md:h-[4vh] bg-purple-800/30 p-4' placeholder='Enter Preference' />
                     <button
@@ -26,7 +27,7 @@ const Nav = () => {
                         Search
                     </button>
                 </div>
-                <Avatar className="border-2 border-white shadow-lg mt-2 mr-8 "
+                <Avatar className="border-2 border-white shadow-lg mt-2 cursor-pointer"
                 onClick={()=>setOpen(!run)}
                 >
                     <AvatarImage src="/panda.png" alt="panda"  />

@@ -1,6 +1,6 @@
   import React from "react";
   import Hero from "./Content/Hero";
-  import ReactTypingEffect from "react-typing-effect";
+
   import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
   export default function Content() {
