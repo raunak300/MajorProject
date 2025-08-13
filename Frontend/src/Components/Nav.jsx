@@ -6,6 +6,7 @@ import ClickBar from './ClickBar'
 
 const Nav = () => {
 
+  const [open, setOpen]= useState(false);
   return (
     <div className='fixed top-0 left-0 z-50 flex md:h-[10vh] w-full flex-row justify-between bg-black text-white items-center px-4'>
       {/* Logo */}
