@@ -34,12 +34,12 @@ export default function FeatureCard({ title, description, icon: Icon, color, cla
         </div>
         
         {/* Title */}
-        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-xl font-semibold text-background group-hover:text-primary transition-colors duration-300">
           {title}
         </h3>
         
         {/* Description */}
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-background leading-relaxed">
           {description}
         </p>
       </div>

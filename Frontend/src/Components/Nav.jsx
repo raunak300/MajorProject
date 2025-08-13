@@ -8,22 +8,21 @@ const Nav = () => {
     const [run, setrun] = useState(false)
     const [open, setOpen] = useState(false)
     return (
-        <div className='flex md:h-[10vh] w-full flex-row justify-between  bg-black text-white' >
-            <div>
-                UNMUTE
-                <br />
+        <div className='flex md:h-[10vh] w-full flex-row justify-between  bg-black text-white items-center' >
+            <div className="font-atma text-2xl ">
+                   🎙️ UNMUTE
+                
 
             </div>
-            <div className='flex flex-row mt-3 gap-8 '>
-                <Link to={{ pathname: '/' }}>Home</Link>
-                <Link to={{ pathname: '/' }}>About Us</Link>
+            <div className='flex flex-row gap-10 '>
+                <Link to={{ pathname: '/' }} className='hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] transition duration-300'>Home</Link>
+                <Link to={{ pathname: '/' }} className='hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] transition duration-300'>About Us</Link>
             </div>
             <div className='flex flex-row  gap-8'>
                 <div className='flex flex-row gap-4 items-center '>
-                    <input type="text" className='border-0 md:h-[4vh] bg-purple-800/30 p-4' placeholder='Search Connection' />
+                    <input type="text" className='border-0 md:h-[4vh] bg-purple-800/30 p-4' placeholder='Enter Preference' />
                     <button
-                    className='border-0  bg-purple-800/30  rounded-md pl-3 pr-3 pt-1 pb-1 '
-                    >
+                    className='border-0  bg-purple-300/30  rounded-md pl-3 pr-3 pt-1 pb-1 '>
                         Search
                     </button>
                 </div>

@@ -4,15 +4,17 @@ import { Brain, Book, Dumbbell, User } from "lucide-react";
 
 export default function Hero() {
     return (
-        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8  ">
+        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8 min-h-screen">
             <div className="flex flex-col gap-10" >
                 <FeatureCard
-                    className="bg-purple-900/10 text-white"
+                    className=" text-white from-green-900 via-green-1200 to-green-950"
                     title="AI Assistant"
                     description="Get intelligent suggestions and insights instantly."
                     icon={Brain}
                     color="ai"
                 />
+            </div>
+            <div>
                 <FeatureCard
                  className="bg-purple-900/10 text-white"
                     title="Journal"
@@ -29,6 +31,8 @@ export default function Hero() {
                     icon={Dumbbell}
                     color="exercise"
                 />
+            </div>
+            <div>
                 <FeatureCard
                  className="bg-purple-900/10 text-white"
                     title="Personal"
