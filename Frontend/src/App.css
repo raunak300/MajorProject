@@ -146,3 +146,11 @@
   animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
   width: 20ch;
 }
+
+
+.font-edu {
+  font-family: "Edu NSW ACT Cursive", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}

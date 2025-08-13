@@ -10,7 +10,7 @@ const Nav = () => {
     return (
         <div className=' flex md:h-[10vh] w-full items-center  bg-black text-white fixed top-0 left-0 z-50
 ' >
-            <div className="font-atma text-2xl pl-4">
+            <div className="font-edu text-2xl pl-4">
                    🎙️ UNMUTE
                 
 
