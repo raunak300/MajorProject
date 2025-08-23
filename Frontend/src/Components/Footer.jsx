@@ -4,12 +4,12 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-border bg-background text-muted-foreground">
+    <footer className="w-full border-t border-border bg-zinc-800 text-white">
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         
         {/* Left: Branding */}
         <div className="flex items-center gap-2">
-          <span className="text-lg font-semibold text-foreground">UNMUTE</span>
+          <span className="text-lg font-semibold text-white">UNMUTE</span>
           <span className="text-sm">© {year}</span>
         </div>
 
