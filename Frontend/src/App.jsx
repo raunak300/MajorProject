@@ -9,8 +9,8 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    {/* <Home /> */}
-    <AuthPage />
+    <Home />
+    {/* <AuthPage /> */}
     </BrowserRouter>
     </>
   )
