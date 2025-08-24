@@ -1,0 +1,7 @@
+signup
+
+route: /api/signup
+
+500-server Error
+201-done correctly
+400-someone exist with same ventid
