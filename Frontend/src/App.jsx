@@ -39,9 +39,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path={'/'} element={<Home />} /> */}
+          <Route path={'/'} element={<Home />} />
           <Route path={'/auth'} element={<AuthPage />} />
-          <Route path="/" element={<ProtectedRoute component={Home} />} />
+          {/* <Route path="/" element={<ProtectedRoute component={Home} />} /> */}
 
           <Route path={'*'} element={<Home />} />
         </Routes>
