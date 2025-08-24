@@ -9,7 +9,7 @@ export default function Content() {
     <main className="flex flex-col text-white w-full">
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-15 px-6 bg-gradient-to-b from-purple-900/40 to-zinc-850">
+      <section className="flex flex-col items-center justify-center text-center py-22 px-6 bg-gradient-to-b from-purple-900/40 to-zinc-850">
         <div>
           <h1 className="text-4xl md:text-6xl font-bold  mt-2.5">
             Express Yourself <br />
@@ -55,11 +55,11 @@ export default function Content() {
       </section>
 
       {/* Discover Section */}
-      <section className="py-16 px-6 bg-gradient-to-b from-zinc-900 to-purple-900/30 text-center items-center ">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+      <section className="py-16 px-6 bg-gradient-to-b from-zinc-900 to-purple-900/30 text-center items-center  ">
+        <h2 className="text-3xl md:text-5xl font-bold mb-2">
           Discover your Path to <span className="text-purple-300 font-comicsans">Wellness</span>
         </h2>
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-4">
           Explore tools, resources, and a supportive community that help you
           express yourself and grow personally.
         </p>

@@ -4,10 +4,10 @@ import { Card } from "@/Components/ui/Card"; // adjust path if needed
 // Props: title, description, icon (Lucide icon component), color, className
 export default function FeatureCard({ title, description, icon: Icon, color, className = "" }) {
   const colorVariants = {
-    ai: "from-feature-ai/20 to-feature-ai/5 border-feature-ai/30 hover:shadow-[0_4px_20px_hsl(var(--feature-ai)/0.3)]",
-    journal: "from-feature-journal/20 to-feature-journal/5 border-feature-journal/30 hover:shadow-[0_4px_20px_hsl(var(--feature-journal)/0.3)]",
-    exercise: "from-feature-exercise/20 to-feature-exercise/5 border-feature-exercise/30 hover:shadow-[0_4px_20px_hsl(var(--feature-exercise)/0.3)]",
-    personal: "from-feature-personal/20 to-feature-personal/5 border-feature-personal/30 hover:shadow-[0_4px_20px_hsl(var(--feature-personal)/0.3)]"
+    ai: "from-green-600 via-green-900 to-green-900 hover:border-green-400",
+  journal: "from-purple-600 via-purple-900 to-purple-900 hover:border-purple-400",
+  exercise: "from-blue-600 via-blue-900 to-blue-900 hover:border-blue-400",
+  personal: "from-indigo-950 via-purple-950 to-black hover:border-purple-900/90",
   };
 
   const iconColors = {
@@ -18,28 +18,30 @@ export default function FeatureCard({ title, description, icon: Icon, color, cla
   };
 
   return (
-    <Card 
+    <Card
       className={`
         group relative overflow-hidden cursor-pointer
         bg-gradient-to-br ${colorVariants[color]}
-        hover:scale-105 transition-all duration-500 ease-out
+        border rounded-2xl p-6
+        hover:scale-[1.02] transition-all duration-500 ease-out
         ${className}
       `}
     >
-      <div className="p-8 h-full flex flex-col items-center justify-center text-center space-y-4">
-        {/* Icon with glow effect */}
-        <div className="relative">
-          <div className={`absolute inset-0 rounded-full blur-xl opacity-30 ${iconColors[color]} bg-current`} />
+      <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
+        
+        {/* Icon with glow */}
+        <div className="relative flex items-center justify-center">
+          <div className={`absolute inset-0 rounded-full blur-2xl opacity-20 ${iconColors[color]} bg-current`} />
           <Icon className={`relative h-12 w-12 ${iconColors[color]} group-hover:scale-110 transition-transform duration-300`} />
         </div>
         
         {/* Title */}
-        <h3 className="text-xl font-semibold text-background group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-lg font-semibold text-white group-hover:text-white transition-colors duration-300">
           {title}
         </h3>
         
         {/* Description */}
-        <p className="text-sm text-muted-background leading-relaxed">
+        <p className="text-sm text-gray-300 leading-relaxed max-w-xs">
           {description}
         </p>
       </div>

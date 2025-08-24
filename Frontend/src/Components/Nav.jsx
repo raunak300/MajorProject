@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from './ui/button'
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
-import ClickBar from './ClickBar'
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
+import ClickBar from './ClickBar';
 
 const Nav = () => {
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null); // Ref for dropdown
 
-  const [open, setOpen]= useState(false);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className='fixed top-0 left-0 z-50 flex md:h-[10vh] w-full flex-row justify-between bg-black text-white items-center px-4'>
       {/* Logo */}
@@ -14,7 +26,7 @@ const Nav = () => {
         🎙️ UNMUTE
       </div>
 
-      {/* Centered Links (desktop only) */}
+      {/* Centered Links */}
       <div className='hidden lg:flex absolute left-1/2 transform -translate-x-1/2 flex-row gap-10'>
         <Link to="/" className='hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] transition duration-300'>
           Home
@@ -37,8 +49,8 @@ const Nav = () => {
           </button>
         </div>
 
-        {/* Avatar with dropdown */}
-        <div className="relative mt-1">
+        {/* Avatar + Dropdown */}
+        <div className="relative mt-1" ref={dropdownRef}>
           <Avatar
             className="border-2 border-white shadow-lg cursor-pointer"
             onClick={() => setOpen(prev => !prev)}
@@ -55,7 +67,7 @@ const Nav = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
