@@ -16,8 +16,8 @@ const signup = async (req, res) => {
         res.cookie("vent_token", token, {
             httpOnly: true,
             maxAge: 12 * 60 * 60 * 1000, // in milliseconds
-            sameSite: "none",
-             secure: process.env.NODE_ENV === "production"
+             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production"
         });
         return res.status(201).send("User Created succesfully");
     } catch (error) {
@@ -42,8 +42,8 @@ const login=async(req,res)=>{
         res.cookie("vent_token", token, {
             httpOnly: true,
             maxAge: 12 * 60 * 60 * 1000, // in milliseconds
-            sameSite: "none",
-             secure: process.env.NODE_ENV === "production"
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production"
         });
         res.status(200).send({message: "user exist"})
         return;
@@ -53,4 +53,16 @@ const login=async(req,res)=>{
     }
 }
 
-module.exports = { signup,login }
+const verify=async(req, res) => {
+  const token = req.cookies.vent_token; // cookie sent automatically by browser
+  if (!token) return res.status(401).send({ valid: false });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).send({ valid: true, id: decoded.id }); // send user info if needed
+  } catch (err) {
+    res.status(401).send({ valid: false, message: "Invalid token" });
+  }
+};
+
+module.exports = { signup,login,verify }

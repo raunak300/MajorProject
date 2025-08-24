@@ -3,6 +3,7 @@ import Nav from "../Components/Nav"; // adjust the path to where your Nav is
 import axios from "axios";
 import { SIGNUP_API, LOGIN_API } from "@/API/apicalls";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "@/Storage/store";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +11,9 @@ const AuthPage = () => {
   const [pass, setpass] = useState("");
   const [repass, setrepass] = useState("")
   const navigate = useNavigate();
+  const logged = useAppStore(state => state.logged);
+  const checkLoggedIn = useAppStore(state => state.checkLoggedIn)
+
 
   const generateVentid = () => {
     const number = Math.floor(Math.random() * 100009);
@@ -23,7 +27,7 @@ const AuthPage = () => {
   }, [isLogin]);
 
   const userLogs = async () => {
-    if(pass.trim()==="" || ventId.trim()===""){
+    if (pass.trim() === "" || ventId.trim() === "") {
       alert("fill the form first");
       return;
     }
@@ -39,6 +43,7 @@ const AuthPage = () => {
           { withCredentials: true }
         )
         if (req.status === 201) {
+          checkLoggedIn(true);
           alert("Signup Done");
           navigate('/')
         }
@@ -55,10 +60,11 @@ const AuthPage = () => {
     } else {
       try {
         const req = await axios.post(LOGIN_API,
-            { ventId, pass },
-            { withCredentials: true }
-          )
-          if (req.status === 200) {
+          { ventId, pass },
+          { withCredentials: true }
+        )
+        if (req.status === 200) {
+          checkLoggedIn(true);
           alert("Login Done");
           navigate('/')
         }
@@ -69,12 +75,12 @@ const AuthPage = () => {
             alert("Server error");
           } else if (error.response.status === 404) {
             alert("NO User  exists. Change VENT_ID");
-          }else if (error.response.status === 401) {
+          } else if (error.response.status === 401) {
             alert("Incorrect VENT_ID or Password");
           }
         }
         console.log("login: ", error)
-        
+
       }
       //api call for login willbe made here
     }
