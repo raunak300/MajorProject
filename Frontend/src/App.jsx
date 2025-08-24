@@ -3,15 +3,19 @@ import './App.css'
 import Home from './Pages/Home'
 import AuthPage from './Pages/AuthPage'
 import { BrowserRouter } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
-  
+
   return (
     <>
-    <BrowserRouter>
-    <Home />
-    {/* <AuthPage /> */}
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path={'/'} element={<Home />} />
+          <Route path={'/auth'} element={<AuthPage />} />
+          <Route path={'*'} element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
