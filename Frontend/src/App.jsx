@@ -3,6 +3,7 @@ import './App.css'
 import Home from './Pages/Home'
 import AuthPage from './Pages/AuthPage'
 import { BrowserRouter } from 'react-router-dom'
+import FlippingBook from './Components/FlippingBook'
 
 function App() {
   
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
     <Home />
     </BrowserRouter>
+    {/* <FlippingBook/> */}
     </>
   )
 }

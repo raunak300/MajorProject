@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import Hero from "./Content/Hero";
 import ClickBar from "../ClickBar";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
-
 export default function Content() {
+  const discoverRef = useRef(null); // Create a ref for the Discover section
+
+  // Scroll to Discover section on button click
+  const scrollToDiscover = () => {
+    if (discoverRef.current) {
+      discoverRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className="flex flex-col text-white w-full">
 
@@ -21,7 +29,10 @@ export default function Content() {
             A safe space for mental wellness, anonymous journaling, and personal
             growth with AI-powered insights to support your emotional well-being.
           </p>
-          <button className="mt-8 text-lg font-medium text-white rounded-lg px-6 py-3 bg-purple-700/70 hover:bg-purple-600 transition-colors">
+          <button
+            className="mt-8 text-lg font-medium text-white rounded-lg px-6 py-3 bg-purple-700/70 hover:bg-purple-600 transition-colors"
+            onClick={scrollToDiscover} // Trigger the scroll function
+          >
             Start Your Journey
           </button>
         </div>
@@ -55,7 +66,7 @@ export default function Content() {
       </section>
 
       {/* Discover Section */}
-      <section className="py-16 px-6 bg-gradient-to-b from-zinc-900 to-purple-900/30 text-center items-center  ">
+      <section ref={discoverRef} className="py-16 px-6 bg-gradient-to-b from-zinc-900 to-purple-900/30 text-center items-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-2">
           Discover your Path to <span className="text-purple-300 font-comicsans">Wellness</span>
         </h2>
