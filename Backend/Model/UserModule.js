@@ -5,7 +5,7 @@ const bcrypt=require('bcrypt');
 const UserSchema=new mongoose.Schema({
     ventId :{
         type:String,
-        reuired:true
+        required:true
     },
     password:{
         type:String,

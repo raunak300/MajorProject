@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Icon = ({ path, viewBox = "0 0 24 24", className = "w-5 h-5" }) => (
@@ -9,14 +9,12 @@ const Icon = ({ path, viewBox = "0 0 24 24", className = "w-5 h-5" }) => (
 
 const Sidebar = () => {
   const navigate = useNavigate();
-
-  return (
+  
+    return (
     <div className="bg-zinc-950 text-white h-full w-full p-6 flex flex-col gap-8 border-r border-purple-800 shadow-2xl">
       
       {/* Top Button */}
-      <button className="bg-purple-700 hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-zinc-950 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-        Your Public Event
-      </button>
+      
 
       {/* Feature Navigation */}
       <div className="flex flex-col gap-2">
@@ -55,6 +53,8 @@ const Sidebar = () => {
           <span className="group-hover:text-white transition-colors">Personal Touch</span>
         </button>
       </div>
+
+    
     </div>
   );
 };

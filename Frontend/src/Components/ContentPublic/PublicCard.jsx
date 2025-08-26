@@ -29,7 +29,7 @@ const PublicCard = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-10 p-4">
+    <div className="flex flex-col gap-10 top-10 p-4">
       <h1 className="text-3xl md:text-4xl font-extrabold text-purple-300 text-center drop-shadow-lg">Your Public Events</h1>
       {events.map((event) => (
         <motion.div

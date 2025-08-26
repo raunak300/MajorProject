@@ -19,6 +19,8 @@ app.use(cors({
 
 const authRoutes=require('./Router/authRoutes.js')
 app.use('/api',authRoutes  )
+const postroutes=require('./Router/postRoutes.js')
+app.use('/post',postroutes)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server running on port: ${process.env.PORT}`);
