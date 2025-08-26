@@ -1,8 +1,11 @@
 import React from "react";
 
-export function Card({ className = "", children }) {
+export function Card({ className = "", children, ...props }) {
   return (
-    <div className={`border border-border rounded-xl shadow-md bg-background ${className}`}>
+    <div
+      {...props} 
+      className={`border border-border rounded-xl shadow-md bg-background ${className}`}
+    >
       {children}
     </div>
   );

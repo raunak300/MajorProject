@@ -1,8 +1,11 @@
 import React from "react";
 import FeatureCard from "./FeatureCard";
 import { Brain, Book, Dumbbell, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
+ 
   return (
     <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8 lg:p-12 ">
       
@@ -20,6 +23,12 @@ export default function Hero() {
         description="Private, secure journaling space to express your thoughts and track your emotional progress."
         icon={Book}
         color="journal"
+        // onClick={() => navigate("/journal")} 
+        onClick={() => {
+        console.log("Journal card clicked!");
+        navigate("/journal");
+        }}
+
       />
 
       <FeatureCard
