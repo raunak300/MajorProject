@@ -10,6 +10,9 @@ const UserSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },Tags:{
+        type:[String],
+        default:[]
     }
 
 })

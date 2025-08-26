@@ -1,9 +1,27 @@
-signup
+Main Task
 
-route: /api/signup
+1)
+route: /post/public/vent/:vid
+post request
+need to send: to backend
+---
+with credentials:true
+const ventId=req.params.vid;
+const {title,description,tag}=req.body
+---
+2)
+change UI for /public page
+---
 
-500-server Error
-201-done correctly
-400-someone exist with same ventid
+3)on '/'' means Home
+onclick Personal Touch open the /public page (i have not implemented that)
 
+---
+4) make a list of tag onFrontend that need to be selected
+on /public
+---
+5)useeffect to only call when a page open for first time to fetch all post based on user-LikedTags
+
+---
+6)make a  page that takes input of user tags(what he like)---to show page on /public based on tags
 

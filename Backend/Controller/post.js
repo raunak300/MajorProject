@@ -1,7 +1,6 @@
 
 const Post=require('../Model/UserPost');
 const User=require('../Model/UserModule');
-const Post = require('../Model/UserPost');
 
 const makePost=async(req,res)=>{
     const ventId=req.params.vid;
