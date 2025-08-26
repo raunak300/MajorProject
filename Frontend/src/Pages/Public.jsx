@@ -1,30 +1,28 @@
 import React from 'react';
 import Nav from '@/Components/Nav';
-import Footer from '@/Components/Footer';
 import PublicContent from '@/Components/ContentPublic/PublicContent';
 import Sidebar from '@/Components/Sidebar';
 
 const Public = () => {
   return (
-    <div className="bg-gray-900 min-h-screen flex flex-col">
-      {/* Navigation */}
+    <div className="bg-gradient-to-b from-zinc-900 to-purple-950 min-h-screen font-sans antialiased text-gray-100">
+      
+      {/* Navigation - Always visible */}
       <Nav />
 
-      {/* Main Layout: Sidebar + Content */}
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <div className="w-1/4 bg-gray-800 p-6 sticky top-0 h-screen">
+      <div className="flex">
+        {/* Fixed Sidebar */}
+        <div className="hidden lg:block w-1/4 fixed top-14 left-0 h-[calc(102vh-4rem)] overflow-y-auto">
           <Sidebar />
         </div>
 
-        {/* Content Area */}
-        <div className="flex-1 p-6">
-          <PublicContent />
+        {/* Scrollable Public Content Area */}
+        <div className="flex-1 lg:ml-1/4 overflow-y-auto px-4 py-6 md:px-8" style={{ marginLeft: '25%' }}>
+          <div className="max-w-4xl mx-auto space-y-10">
+            <PublicContent />
+          </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

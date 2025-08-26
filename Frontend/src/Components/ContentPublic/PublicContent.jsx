@@ -1,13 +1,10 @@
-import React from 'react'
-import PublicCard from './PublicCard'
-import Sidebar from '../Sidebar'
+import PublicCard from "./PublicCard";
 const PublicContent = () => {
   return (
-    <div>
-        <PublicCard />
-        
+    <div className="py-8">
+      <PublicCard />
     </div>
-  )
-}
+  );
+};
 
-export default PublicContent
+export default PublicContent;
