@@ -1,4 +1,4 @@
-// Notebook.jsx
+// FlippingBook.jsx
 import React, { useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,59 +6,68 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const RuledPage = React.forwardRef(
   ({ pageIndex, values, setValues, isEditing, setEditing }, ref) => {
     const LINE = 28;
+    const textareaRef = React.useRef(null);
+
+    React.useEffect(() => {
+      if (isEditing === pageIndex && textareaRef.current) {
+        textareaRef.current.focus();
+      }
+    }, [isEditing, pageIndex]);
 
     return (
       <div
-        ref={ref}
-        className="w-full h-full relative rounded-md shadow-sm border border-zinc-200 bg-white cursor-text"
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              to bottom,
-              transparent 0px,
-              transparent ${LINE - 1}px,
-              rgba(0,0,0,0.08) ${LINE - 1}px,
-              rgba(0,0,0,0.08) ${LINE}px
-            )
-          `,
-          backgroundSize: `100% ${LINE}px`,
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          setEditing(pageIndex); // focus typing on this page
-        }}
-      >
-        {/* Red margin */}
+  ref={ref}
+  className="w-full h-full relative rounded-md shadow-md border border-yellow-900/40 
+             bg-[#c8c6c1] cursor-text" // ✅ darker vintage paper tone
+  style={{
+    backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent ${LINE - 1}px,
+        rgba(70, 130, 180, 0.25) ${LINE - 1}px,
+        rgba(70, 130, 180, 0.25) ${LINE}px
+      )
+    `,
+    backgroundSize: `100% ${LINE}px`,
+  }}
+  onClick={(e) => {
+    e.stopPropagation();
+    setEditing(pageIndex);
+  }}
+>
+
+        {/* Vintage red margin line */}
         <div
           className="absolute top-0 bottom-0"
           style={{
             left: 56,
             width: 2,
-            background: "rgba(220, 38, 38, 0.8)",
+            background: "rgba(220, 38, 38, 0.5)", // soft faded red
           }}
         />
 
-        {/* Always-mounted textarea */}
+        {/* Textarea */}
         <textarea
-          autoFocus={isEditing === pageIndex}
-          readOnly={isEditing !== pageIndex} // ⬅️ main fix
+          ref={textareaRef}
           value={values[pageIndex]}
           onChange={(e) => {
             const next = [...values];
             next[pageIndex] = e.target.value;
             setValues(next);
           }}
-          className="absolute inset-0 w-full h-full bg-transparent outline-none resize-none text-[16px] leading-[28px] p-6 pt-6 pr-6"
+          readOnly={isEditing !== pageIndex}
+          className="absolute inset-0 w-full h-full bg-transparent outline-none resize-none 
+                     text-[16px] leading-[28px] p-6 pt-6 pr-6 font-serif text-gray-800"
           style={{
             paddingLeft: 72,
-            color: isEditing === pageIndex ? "#111" : "#555",
-            cursor: isEditing === pageIndex ? "text" : "pointer",
           }}
         />
       </div>
     );
   }
 );
+
 
 export default function Notebook() {
   const totalPages = 12;
@@ -67,7 +76,7 @@ export default function Notebook() {
   const bookRef = useRef(null);
 
   const flipPrev = () => {
-    setEditing(null); // stop editing when flipping
+    setEditing(null);
     bookRef.current?.pageFlip().flipPrev();
   };
   const flipNext = () => {
@@ -77,9 +86,13 @@ export default function Notebook() {
 
   return (
     <div
-      className="min-h-screen w-full flex flex-col items-center justify-center bg-zinc-100 py-8"
-      onClick={() => setEditing(null)} // clicking outside stops editing
+      className="min-h-screen w-full flex flex-col items-center justify-center 
+                 bg-gradient-to-b from-purple-950 via-purple-900 to-black py-4"
+      onClick={() => setEditing(null)}
     >
+      <h1 className="text-3xl font-bold text-white mb-6 font-atma">My Journal</h1>
+
+
       <HTMLFlipBook
         ref={bookRef}
         width={420}
@@ -87,11 +100,11 @@ export default function Notebook() {
         size="stretch"
         showCover={false}
         drawShadow
-        maxShadowOpacity={0.5}
+        maxShadowOpacity={0.4}
         flippingTime={900}
         useMouseEvents={false}
         mobileScrollSupport={true}
-        className="shadow-2xl rounded-md bg-white"
+        className="shadow-2xl rounded-lg border border-purple-700"
       >
         {Array.from({ length: totalPages }).map((_, i) => (
           <RuledPage
@@ -106,13 +119,14 @@ export default function Notebook() {
       </HTMLFlipBook>
 
       {/* Navigation */}
-      <div className="mt-6 flex gap-6 z-10">
+      <div className="mt-8 flex gap-6 z-10">
         <button
           onClick={(e) => {
             e.stopPropagation();
             flipPrev();
           }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full 
+                     bg-purple-700 hover:bg-purple-600 text-white font-medium transition"
         >
           <ChevronLeft size={20} />
           Prev
@@ -122,16 +136,18 @@ export default function Notebook() {
             e.stopPropagation();
             flipNext();
           }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full 
+                     bg-purple-700 hover:bg-purple-600 text-white font-medium transition"
         >
           Next
           <ChevronRight size={20} />
         </button>
-      </div>
 
-      <p className="mt-3 text-sm text-zinc-600">
-        Tip: Click a page to type continuously. Click outside to stop. Use arrows to flip.
-      </p>
+      </div>
+  
+
     </div>
   );
 }
+
+

@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useAppStore } from './Storage/store'
 import axios from 'axios'
 import { VERIFY_API } from "@/API/apicalls";
+import FlippingBook from "./Components/FlippingBook"
 
 
 
@@ -41,7 +42,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/auth'} element={<AuthPage />} />
-          {/* <Route path="/" element={<ProtectedRoute component={Home} />} /> */}
+          <Route path="/journal" element={<ProtectedRoute component={FlippingBook} />} />
 
           <Route path={'*'} element={<Home />} />
         </Routes>

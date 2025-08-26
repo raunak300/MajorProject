@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@/Components/ui/Card"; // adjust path if needed
 
 // Props: title, description, icon (Lucide icon component), color, className
-export default function FeatureCard({ title, description, icon: Icon, color, className = "" }) {
+export default function FeatureCard({ title, description, icon: Icon, color, className = "" , onClick}) {
   const colorVariants = {
     ai: "from-green-600 via-green-900 to-green-900 hover:border-green-400",
   journal: "from-purple-600 via-purple-900 to-purple-900 hover:border-purple-400",
@@ -19,6 +19,7 @@ export default function FeatureCard({ title, description, icon: Icon, color, cla
 
   return (
     <Card
+    onClick={onClick}  
       className={`
         group relative overflow-hidden cursor-pointer
         bg-gradient-to-br ${colorVariants[color]}
