@@ -44,7 +44,6 @@ function App() {
           <Route path={'/'} element={<Home />} />
           <Route path={'/auth'} element={<AuthPage />} />
           <Route path="/journal" element={<ProtectedRoute component={FlippingBook} />} />
-
           <Route path={'/public'} element={ <Public/> } />
           <Route path={'*'} element={<Home />} />
         </Routes>
