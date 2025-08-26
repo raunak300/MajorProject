@@ -21,4 +21,30 @@ const makePost=async(req,res)=>{
 
 }
 
-module.exports={makePost}
+const sendPost=async(req,res)=>{
+    const ventId=req.params.vid;
+    try {
+        const user=await User.findOne({ventId:ventId});
+        if(!user){
+            res.status(404).send({message:"no user exist"})
+            return ;
+        }
+        const tag=user.Tags;
+        console.log(tag);
+        // const posts=[]
+        // for(let i=0;i<tag.length;i++){
+        //     const post=await Post.find({Tag:tag[i]}).sort({ createdAt: -1 }).limit(100);
+        //     posts.push(...post)
+        // }
+        const posts = await Post.find({ Tag: { $in: user.Tags } })
+                        .sort({ createdAt: -1 })
+                        .limit(100);
+
+        res.status(200).send({message:"Post Collected",AllPost:posts})
+        
+    } catch (error) {
+        res.status(200).send({message:"server Error in sending Posts"})
+    }
+}
+
+module.exports={makePost,sendPost}
