@@ -13,6 +13,8 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const logged = useAppStore(state => state.logged);
   const checkLoggedIn = useAppStore(state => state.checkLoggedIn)
+  const setUserData=useAppStore(state=>state.setUserData)
+  
 
 
   const generateVentid = () => {
@@ -43,6 +45,7 @@ const AuthPage = () => {
           { withCredentials: true }
         )
         if (req.status === 201) {
+          setUserData({ ventId: ventId});
           checkLoggedIn(true);
           alert("Signup Done");
           navigate('/')
@@ -65,6 +68,7 @@ const AuthPage = () => {
         )
         if (req.status === 200) {
           checkLoggedIn(true);
+          setUserData({ ventId: ventId})
           alert("Login Done");
           navigate('/')
         }

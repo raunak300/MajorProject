@@ -15,6 +15,7 @@ import Public from './Pages/Public'
 function App() {
   const logged = useAppStore(state => state.logged);
   const setLogged = useAppStore(state => state.checkLoggedIn);
+  const setUserData=useAppStore(state=>state.setUserData);
 
   const checkToken = async () => {
     try {
@@ -23,6 +24,7 @@ function App() {
       });
       if (res.data.valid) {
         setLogged(true); // update Zustand store
+        setUserData({ ventId: res.data.ventId });
       } else {
         setLogged(false);
         

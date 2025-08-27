@@ -1,12 +1,19 @@
+import { useAppStore } from "@/Storage/store";
 import PublicCard from "./PublicCard";
 import { useState } from "react";
 
 const PublicContent = () => {
   const [view, setView] = useState(false);
-  const [ventId,setventID]=useState("VENT_EXAMPLE")
+  const [title,setTitle ] = useState("")
+  const [Description, setdescription] = useState("")
+  const [tags, settags] = useState("")
+  const user=useAppStore(status=>status.user);
+  const [ventId,setventID]=useState(user.ventId)
+
 
   const makeEvent = () => {
     setView(true);
+    console.log(user);
   };
 
   const closeEvent = () => {
@@ -38,7 +45,7 @@ const PublicContent = () => {
             </button>
             <div>
               <label className="block text-gray-200 font-medium">Title:</label>
-              <input className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white" />
+              <input className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white" value={title} />
             </div>
             <div>
               <label className="block text-gray-200 font-medium">VentId:</label>

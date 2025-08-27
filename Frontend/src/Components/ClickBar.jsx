@@ -7,6 +7,7 @@ const ClickBar = () => {
   const Navigate = useNavigate()
   const logged = useAppStore(state => state.logged)
   const checkLoggedIn = useAppStore(state => state.checkLoggedIn)
+  const clearUserData=useAppStore(state=>state.clearUserData)
   function doLogin() {
     Navigate('/auth')
   }
@@ -14,6 +15,7 @@ const ClickBar = () => {
     try {
       const res = await axios.post(LOGOUT_API,{} ,{ withCredentials: true })
       if (res.status === 200) {
+        clearUserData()
         checkLoggedIn(false);
         Navigate('/auth')
       }

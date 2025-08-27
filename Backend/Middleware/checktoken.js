@@ -11,7 +11,7 @@ const checkToken=(req,res,next)=>{
             //  next();
         }
         const decoded = jwt.verify(token, jwtVerify);
-        req.ventId=decoded;
+        req.ventId=decoded.ventId;
         console.log("u can check the info from here in middleware",req.ventId);
         next();
     } catch (error) {

@@ -12,7 +12,7 @@ const signup = async (req, res) => {
         }
         const user = new User({ ventId, password: pass });
         await user.save()
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "12h" });
+        const token = jwt.sign({ id: user._id, ventId:ventId }, process.env.JWT_SECRET, { expiresIn: "12h" });
         res.cookie("vent_token", token, {
             httpOnly: true,
             maxAge: 12 * 60 * 60 * 1000, // in milliseconds
@@ -38,7 +38,7 @@ const login = async (req, res) => {
             return res.status(401).send({ message: "Invalid credentials" });
 
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "12h" });
+        const token = jwt.sign({ id: user._id, ventId:ventId  }, process.env.JWT_SECRET, { expiresIn: "12h" });
         res.cookie("vent_token", token, {
             httpOnly: true,
             maxAge: 12 * 60 * 60 * 1000, // in milliseconds
@@ -59,7 +59,7 @@ const verify = async (req, res) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        res.status(200).send({ valid: true, id: decoded.id }); // send user info if needed
+        res.status(200).send({ valid: true, id: decoded.id, ventId:decoded.ventId }); // send user info if needed
     } catch (err) {
         res.status(401).send({ valid: false, message: "Invalid token" });
     }
