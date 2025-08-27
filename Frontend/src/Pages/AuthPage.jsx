@@ -45,7 +45,7 @@ const AuthPage = () => {
         if (req.status === 201) {
           checkLoggedIn(true);
           alert("Signup Done");
-          navigate('/')
+          navigate('/preferences');
         }
       } catch (error) {
         if (error.response) {

@@ -3,7 +3,7 @@ import FeatureCard from "./FeatureCard";
 import { Brain, Book, Dumbbell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function Hero() {
+export default function Hero({ scrollToAI }) {
   const navigate = useNavigate();
  
   return (
@@ -15,6 +15,8 @@ export default function Hero() {
         description="Intelligent insights and personalized recommendations to support your mental wellness journey."
         icon={Brain }
         color="ai"
+        onClick={scrollToAI}
+        
       />
 
       <FeatureCard
@@ -25,7 +27,6 @@ export default function Hero() {
         color="journal"
         // onClick={() => navigate("/journal")} 
         onClick={() => {
-        console.log("Journal card clicked!");
         navigate("/journal");
         }}
 
@@ -41,7 +42,7 @@ export default function Hero() {
 
       <FeatureCard
         className="w-60 h-60"
-        title="Personal Touch"
+        title="Personal"
         description="Connect with like-minded individuals in a safe, anonymous environment focused on healing."
         icon={User}
         color="personal"

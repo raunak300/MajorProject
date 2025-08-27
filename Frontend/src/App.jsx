@@ -9,6 +9,7 @@ import axios from 'axios'
 import { VERIFY_API } from "@/API/apicalls";
 import FlippingBook from "./Components/FlippingBook"
 import Public from './Pages/Public'
+import Preference from "./Pages/Preference"
 
 
 
@@ -45,7 +46,9 @@ function App() {
           <Route path={'/auth'} element={<AuthPage />} />
           <Route path="/journal" element={<ProtectedRoute component={FlippingBook} />} />
           <Route path={'/public'} element={ <Public/> } />
+          <Route path="/preferences" element={<Preference />} />
           <Route path={'*'} element={<Home />} />
+        
         </Routes>
       </BrowserRouter>
     </>
