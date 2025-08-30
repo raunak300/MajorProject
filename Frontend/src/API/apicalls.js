@@ -6,4 +6,4 @@ export const LOGIN_API = `${API}/login`;
 export const LOGOUT_API = `${API}/logout`;
 export const VERIFY_API=`${API}/verify-token`
 
-export const MAKE_POST=``
+export const MAKE_POST=`${HOST}/post/public/vent`

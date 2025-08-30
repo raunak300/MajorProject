@@ -3,10 +3,10 @@ const Post=require('../Model/UserPost');
 const User=require('../Model/UserModule');
 
 const makePost=async(req,res)=>{
-    const ventId=req.params.vid;
-    const {title,description,tag}=req.body
+    
+    const {title,description,tag,ventId}=req.body
     try {
-        const user=await User.findOne({ventId:ventId});
+        const user=await User.findOne({ventId:ventId.parseInt()});
         if(!user){
             res.status(404).send({message:"User not exist"})
             return ;
