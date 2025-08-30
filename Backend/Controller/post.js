@@ -5,24 +5,26 @@ const User=require('../Model/UserModule');
 const makePost=async(req,res)=>{
     
     const {title,description,tag,ventId}=req.body
+    const id=req.userId
     try {
-        const user=await User.findOne({ventId:ventId.parseInt()});
+        const user=await User.findOne({ventId : ventId});
         if(!user){
             res.status(404).send({message:"User not exist"})
             return ;
         }
-        const post=new Post({ventId:ventId,Title:title,Description:description,Tag:tag});
+        const post=new Post({userId:id,Title:title,Description:description,Tag:tag});
         await post.save();
         res.status(200).send({message:"User Post Created"});
         
     } catch (error) {
-        res.status(500).send({message:"Server Error in Post creation"})
+        console.log(error)
+        res.status(500).send({message:"some error in making post"})
     }
 
 }
 
 const sendPost=async(req,res)=>{
-    const ventId=req.params.vid;
+    const ventId=req.ventId
     try {
         const user=await User.findOne({ventId:ventId});
         if(!user){
@@ -31,15 +33,10 @@ const sendPost=async(req,res)=>{
         }
         const tag=user.Tags;
         console.log(tag);
-        // const posts=[]
-        // for(let i=0;i<tag.length;i++){
-        //     const post=await Post.find({Tag:tag[i]}).sort({ createdAt: -1 }).limit(100);
-        //     posts.push(...post)
-        // }
         const posts = await Post.find({ Tag: { $in: user.Tags } })
                         .sort({ createdAt: -1 })
                         .limit(100);
-
+        console.log(posts)
         res.status(200).send({message:"Post Collected",AllPost:posts})
         
     } catch (error) {

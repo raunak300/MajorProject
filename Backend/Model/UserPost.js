@@ -5,7 +5,7 @@ const Comment=require('./UserComment')
 
 
 const PostSchema = new mongoose.Schema({
-    ventId: {
+    userId: {
         type:mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'

@@ -11,3 +11,4 @@ export const MAKE_POST=`${HOST}/post/public/vent`
 export const VERIFY_API=`${API}/verify-token`;
 export const PREFERENCE_API = `${HOST}/user/take-preference`;
 
+export const MAKE_POST_CALL= `${HOST}/post/public/page`

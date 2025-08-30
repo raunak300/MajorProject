@@ -6,17 +6,17 @@ import { MAKE_POST } from "@/API/apicalls";
 
 const PublicContent = () => {
   const [view, setView] = useState(false);
-  const [title,setTitle ] = useState("")
+  const [title, setTitle] = useState("")
   const [description, setdescription] = useState("")
   const [tags, settags] = useState()
-  const user=useAppStore(status=>status.user);
-  const [ventId,setventID]=useState(user.ventId)
+  const user = useAppStore(status => status.user);
+  const [ventId, setventID] = useState(user.ventId)
 
-  const makePost=async()=>{
-   
+  const makePost = async () => {
+
     try {
-       const res = await axios.post(`${MAKE_POST}`,{title:title,description:description,tag:tags,ventId:ventId},{withCredentials:true})
-      if(res.status===200){
+      const res = await axios.post(`${MAKE_POST}`, { title: title, description: description, tag: tags, ventId: ventId }, { withCredentials: true })
+      if (res.status === 200) {
         alert(error.response?.data.message)
       }
     } catch (error) {
@@ -40,7 +40,7 @@ const PublicContent = () => {
       <div className="absolute top-5 right-0 mt-4 mr-2">
         <button
           className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-4 px-4 rounded-lg text-sm shadow-md transition-all duration-300 transform hover:scale-105"
-          onClick={()=>makeEvent()}
+          onClick={() => makeEvent()}
         >
           Add Your Thoughts
         </button>
@@ -59,7 +59,7 @@ const PublicContent = () => {
             <div>
               <label className="block text-gray-200 font-medium">Title:</label>
               <input className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white" value={title}
-              onChange={e=>setTitle(e.target.value)}
+                onChange={e => setTitle(e.target.value)}
               />
             </div>
             <div>
@@ -69,27 +69,30 @@ const PublicContent = () => {
             <div>
               <label className="block text-gray-200 font-medium">Description:</label>
               <textarea className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white" rows={4}
-                onChange={e=>setdescription(e.target.value)}
+                onChange={e => setdescription(e.target.value)}
               />
             </div>
             <div>
               <label className="block text-gray-200 font-medium">Tags:</label>
 
-              <select className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white">
-                <option>Mental Wellness</option>
-                <option>Sleep</option>
-                <option>Exercise</option>
-                <option>Food</option>
-                <option>Music</option>
-                <option>Movies</option>
-                <option>Art</option>
-                <option>Nature</option>
-                <option>Gaming</option>
+              <select className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white"
+                onChange={(e) => settags(e.target.value)}
+              >
+                <option value="">Select a tag</option>
+                <option value="Mental Wellness">Mental Wellness</option>
+                <option value="Sleep">Sleep</option>
+                <option value="Exercise">Exercise</option>
+                <option value="Food">Food</option>
+                <option value="Music">Music</option>
+                <option value="Movies">Movies</option>
+                <option value="Art">Art</option>
+                <option value="Nature">Nature</option>
+                <option value="Gaming">Gaming</option>
 
               </select>
             </div>
             <button className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg w-full mt-2"
-            onClick={e=>makePost()}
+              onClick={e => makePost()}
             >
               Add Event
             </button>

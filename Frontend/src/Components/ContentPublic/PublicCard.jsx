@@ -1,48 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import { MAKE_POST_CALL } from "@/API/apicalls";
 
 const PublicCard = () => {
   const [selectedPost, setSelectedPost] = useState(null);
+  const [posts, setposts] = useState([])
 
-  const events = [
-    {
-      VENT_ID: 1,
-      Title: "Music Festival",
-      description:
-        "An outdoor music festival with live bands and food trucks. This year it’s going to be bigger than ever with international artists, multiple stages, and a food carnival.",
-      comments: [
-        { user: "raj123", text: "Awesome event!", time: "2h" },
-        { user: "neha_k", text: "Had a great time!", time: "5h" },
-        { user: "musiclover", text: "Looking forward to next year!", time: "1d" },
-        { user: "arjun_", text: "Wish it lasted longer!", time: "2d" },
-        { user: "ananya", text: "The food was amazing!", time: "3d" },
-      ],
-    },
-    {
-      VENT_ID: 2,
-      Title: "Tech Conference",
-      description:
-        "A conference for tech enthusiasts and professionals where innovation meets collaboration. Includes keynote speakers, workshops, and networking.",
-      comments: [
-        { user: "coderX", text: "Very informative.", time: "3h" },
-        { user: "techgal", text: "Loved the keynote session!", time: "6h" },
-        { user: "vivek", text: "Great networking opportunity.", time: "1d" },
-        { user: "megha", text: "Met so many cool people!", time: "2d" },
-      ],
-    },
-    {
-      VENT_ID: 3,
-      Title: "Art Exhibition",
-      description:
-        "An exhibition showcasing modern art pieces from local artists. Expect stunning paintings, sculptures, and interactive installations.",
-      comments: [
-        { user: "artist_rahul", text: "Beautiful artwork.", time: "4h" },
-        { user: "sonia", text: "Very inspiring!", time: "8h" },
-        { user: "vishal", text: "Would love to see more.", time: "1d" },
-        { user: "deepa", text: "A wonderful experience!", time: "2d" },
-      ],
-    },
-  ];
+
+  const callPosts=async()=>{
+    try {
+      const response=await axios.get(MAKE_POST_CALL,{withCredentials:true}) 
+      if(response.status===200){
+        const data=response.data.AllPost
+        console.log(data)
+        await setposts(data)
+      }
+    } catch (error) {
+      alert("error ")
+    }
+  }
+  useEffect(() => {
+    callPosts()
+  }, [])
+  
 
   const truncateText = (text, maxLength = 120) => {
     if (text.length <= maxLength) return text;
@@ -55,7 +36,7 @@ const PublicCard = () => {
         Top Thoughts
       </h1>
 
-      {events.map((event) => (
+      {posts.map((event) => (
         <motion.div
           key={event.VENT_ID}
           initial={{ opacity: 0, y: 20 }}
@@ -68,17 +49,17 @@ const PublicCard = () => {
               {event.Title}
             </div>
             <p className="text-gray-300 mt-1">
-              {truncateText(event.description)}
+              {truncateText(event.Description)}
             </p>
           </div>
 
           {/* Preview Comments */}
           <div className="border-t border-purple-500/50 pt-4 mt-4">
             <div className="font-semibold text-gray-300 mb-3">
-              Comments ({event.comments.length})
+              Comments ({event.Comments?.length})
             </div>
             <div className="flex flex-col gap-2">
-              {event.comments.slice(0, 3).map((cmt, idx) => (
+              {event.Comments.slice(0, 3).map((cmt, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -10 }}
@@ -127,15 +108,15 @@ const PublicCard = () => {
               <h2 className="text-3xl font-bold text-purple-200 mb-2">
                 {selectedPost.Title}
               </h2>
-              <p className="text-gray-300 mb-6">{selectedPost.description}</p>
+              <p className="text-gray-300 mb-6">{selectedPost.Description}</p>
 
               {/* Comments with small Connect buttons */}
               <div className="border-t border-purple-500/50 pt-4">
                 <div className="font-semibold text-gray-300 mb-3">
-                  All Comments ({selectedPost.comments.length})
+                  All Comments ({selectedPost.Comments?.length})
                 </div>
                 <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
-                  {selectedPost.comments.map((cmt, idx) => (
+                  {selectedPost.Comments.map((cmt, idx) => (
                     <div
                       key={idx}
                       className="flex items-start gap-3 justify-between"
