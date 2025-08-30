@@ -87,14 +87,14 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-purple-900 to-black text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-purple-950 to-black text-white">
 
 
       {/* Auth Card Section */}
       <div className="flex-grow flex items-center justify-center pt-24">
-        <div className="bg-black/70 backdrop-blur-lg border border-purple-500 rounded-xl shadow-lg p-8 w-full max-w-md">
+        <div className="bg-black/70 backdrop-blur-lg border border-purple-600 rounded-xl shadow-lg p-8 w-full max-w-md">
           {/* Title */}
-          <h2 className="text-3xl font-bold text-center mb-6 text-purple-300">
+          <h2 className="text-3xl font-bold text-center mb-6 text-purple-350">
             {isLogin ? "Welcome Back!" : "Join UNMUTE"}
           </h2>
           <p className="text-center text-gray-400 mb-8">

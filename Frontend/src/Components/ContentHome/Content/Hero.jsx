@@ -16,7 +16,6 @@ export default function Hero({ scrollToAI }) {
         icon={Brain }
         color="ai"
         onClick={scrollToAI}
-        
       />
 
       <FeatureCard
@@ -46,6 +45,9 @@ export default function Hero({ scrollToAI }) {
         description="Connect with like-minded individuals in a safe, anonymous environment focused on healing."
         icon={User}
         color="personal"
+        onClick={() => {
+        navigate("/public");
+        }}
       />
 
     </div>
