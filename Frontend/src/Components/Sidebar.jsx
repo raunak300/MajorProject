@@ -50,7 +50,7 @@ const Sidebar = () => {
           className="flex items-center gap-4 py-3 px-3 rounded-lg hover:bg-purple-900/40 transition-colors duration-200 group text-lg font-medium text-gray-200"
         >
           <Icon path="M19.35 10.04C18.67 6.59 15.64 4 12 4c-2.82 0-5.3 1.42-6.71 3.55C3.3 7.96 1 10.79 1 14c0 3.31 2.69 6 6 6h12c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" className="w-6 h-6" />
-          <span className="group-hover:text-white transition-colors">Personal Touch</span>
+          <span className="group-hover:text-white transition-colors">Personal </span>
         </button>
       </div>
 
