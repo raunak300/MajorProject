@@ -23,6 +23,8 @@ const postroutes=require('./Router/postRoutes.js')
 app.use('/post',postroutes)
 const tagRoutes=require('./Router/userTags.js')
 app.use('/user',tagRoutes)
+const moveRouter = require('./Router/moveRouter.js')
+app.use('/user',moveRouter)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server running on port: ${process.env.PORT}`);

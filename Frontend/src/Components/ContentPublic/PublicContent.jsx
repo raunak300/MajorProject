@@ -39,7 +39,7 @@ const PublicContent = () => {
       {/* Add Your Thoughts Button - top-right */}
       <div className="absolute top-5 right-0 mt-4 mr-2">
         <button
-          className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg text-sm shadow-md transition-all duration-300 transform hover:scale-105"
+          className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-4 px-4 rounded-lg text-sm shadow-md transition-all duration-300 transform hover:scale-105"
           onClick={()=>makeEvent()}
         >
           Add Your Thoughts
@@ -74,12 +74,18 @@ const PublicContent = () => {
             </div>
             <div>
               <label className="block text-gray-200 font-medium">Tags:</label>
-              <select className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white"
-              onChange={e=>settags(e.value)}
-              >
-                <option>Tag 1</option>
-                <option>Tag 2</option>
-                <option>Tag 3</option>
+
+              <select className="w-full mt-1 p-2 rounded-md bg-zinc-800 text-white">
+                <option>Mental Wellness</option>
+                <option>Sleep</option>
+                <option>Exercise</option>
+                <option>Food</option>
+                <option>Music</option>
+                <option>Movies</option>
+                <option>Art</option>
+                <option>Nature</option>
+                <option>Gaming</option>
+
               </select>
             </div>
             <button className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg w-full mt-2"

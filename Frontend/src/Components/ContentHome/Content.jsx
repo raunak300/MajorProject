@@ -1,17 +1,23 @@
 import React, { useRef } from "react";
 import Hero from "./Content/Hero";
 import ClickBar from "../ClickBar";
+import AiBlocks from "./Content/AiBlocks"
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
 export default function Content() {
-  const discoverRef = useRef(null); // Create a ref for the Discover section
+  const discoverRef = useRef(null);
+  const aiRef = useRef(null);
 
-  // Scroll to Discover section on button click
   const scrollToDiscover = () => {
     if (discoverRef.current) {
       discoverRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+  const scrollToAI = () => {
+  if (aiRef.current) {
+    aiRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
   return (
     <main className="flex flex-col text-white w-full">
@@ -74,7 +80,18 @@ export default function Content() {
           Explore tools, resources, and a supportive community that help you
           express yourself and grow personally.
         </p>
-        <Hero />
+        <Hero scrollToAI={scrollToAI}/>
+      </section>
+
+      {/* AI Section */}
+      <section ref={aiRef} className="py-16 px-6 bg-gradient-to-b from-zinc-900 to-purple-900/30 text-center items-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-2">
+          <span className="text-purple-300 font-comicsans">AI</span> Features
+        </h2>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-4">
+          The only AI that sits with you in silence, speaks when needed, and hugs without words.
+        </p>
+        <AiBlocks/>
       </section>
 
     </main>
