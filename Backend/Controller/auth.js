@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 
 const signup = async (req, res) => {
     const { ventId, pass } = req.body;
+    console.log(pass,"in signup")
     try {
         const existing = await User.findOne({ ventId })
         if (existing) {
@@ -27,13 +28,16 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     const { ventId, pass } = req.body;
+    console.log(pass)
     try {
         const user = await User.findOne({ ventId });
         if (!user) {
             res.status(404).send({ message: "no user exist" });
             return
         }
-        const isMatch = await bcrypt.compare(pass, user.password);
+        console.log(user)
+        const isMatch = await bcrypt.compare(pass.toString(), user.password);
+        console.log(isMatch)
         if (!isMatch) {
             return res.status(401).send({ message: "Invalid credentials" });
 

@@ -17,11 +17,13 @@ const UserSchema=new mongoose.Schema({
 
 })
 
-UserSchema.pre('save',async function(next){
-    const hashCount=10;
-    this.password=await bcrypt.hash(this.password,hashCount);
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next(); // ✅ Only hash if modified
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
     next();
-})
+});
+
 
 const User=mongoose.model('User',UserSchema);
 module.exports=User;
