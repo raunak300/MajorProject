@@ -20,10 +20,8 @@ const MyProfile = () => {
           <div className="flex-1">
             <div className="flex items-center gap-4">
               <h2 className="text-2xl font-bold">VentID_12345</h2>
-              <Button size="sm" variant="secondary" className="bg-purple-700 text-white">
-                <Edit3 className="mr-2 h-4 w-4" /> Edit Profile
-              </Button>
-              <Button size="sm" variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-700">
+              
+              <Button size="sm" variant="outline" className="bg-purple-700 text-white">
                 <LogOut className="mr-2 h-4 w-4" /> Logout
               </Button>
             </div>

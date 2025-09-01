@@ -1,7 +1,9 @@
 // FlippingBook.jsx
 import React, { useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 const RuledPage = React.forwardRef(
   ({ pageIndex, values, setValues, isEditing, setEditing }, ref) => {
@@ -78,6 +80,8 @@ export default function Notebook() {
   const [pages, setPages] = useState(Array(20).fill(""));
   const [isEditing, setEditing] = useState(null);
   const bookRef = useRef(null);
+  const navigate = useNavigate();
+
 
   const flipPrev = () => {
     setEditing(null);
@@ -110,19 +114,33 @@ export default function Notebook() {
                  bg-gradient-to-b from-purple-950 via-purple-900 to-black py-4"
       onClick={() => setEditing(null)}
     >
+
+      {/* 🔹 Home Button (floating top-left corner) */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate("/");
+        }}
+        className="absolute top-4 left-4 p-2 rounded-full 
+                  bg-purple-900 hover:bg-purple-600 text-white shadow-lg transition cursor-pointer"
+      >
+        <Home size={22} />
+      </button>
+
       {/* 🔹 Add Pages Button (floating top-right corner) */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           addPages(10);
         }}
-        className="absolute top-4 right-4 px-5 py-2 rounded-full 
+        className="absolute top-4 right-4 px-5 py-2 rounded-full flex items-center gap-2
                    bg-green-700 hover:bg-green-600 text-white font-medium shadow-lg transition cursor-pointer"
       >
-        ➕ Add 10 Pages
+         <Plus/>
+         <span className="text-sm font-medium">Add 10 Pages</span>
       </button>
 
-      <h1 className="text-3xl font-bold text-white mb-6 font-atma">My Journal</h1>
+      <h1 className="text-3xl font-bold text-white mb-6 font-comicsans">My Journal</h1>
 
       <HTMLFlipBook
         ref={bookRef}
@@ -196,5 +214,6 @@ export default function Notebook() {
         </button>
       </div>
     </div>
+    
   );
 }
