@@ -10,6 +10,7 @@ import { VERIFY_API } from "@/API/apicalls";
 import FlippingBook from "./Components/FlippingBook"
 import Public from './Pages/Public'
 import Preference from "./Pages/Preference"
+import MyProfile from './Pages/MyProfile'
 
 
 
@@ -46,9 +47,10 @@ function App() {
         <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/auth'} element={<AuthPage />} />
-          <Route path="/journal" element={<ProtectedRoute component={FlippingBook} />} />
+          <Route path={"/journal"} element={<ProtectedRoute component={FlippingBook} />} />
           <Route path={'/public'} element={<ProtectedRoute component={Public} />} />
-          <Route path="/preferences" element={<Preference />} />
+          <Route path={"/preferences"} element={<Preference />} />
+          <Route path={"/profile"} element={<MyProfile />} />
           <Route path={'*'} element={<Home />} />
         
         </Routes>
