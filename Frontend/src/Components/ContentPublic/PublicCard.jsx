@@ -10,8 +10,17 @@ const PublicCard = () => {
   const [comment,setComment]=useState("")
   const ventId=useAppStore(state=>state.user.ventId)
 
-  const addComment=async(comment)=>{
-    const response=await  axios.post(MAKE_COMMENT,{comment:comment,ventId:ventId})
+  const addComment=async(comment,selectedPostId)=>{
+    try {
+      const response=await  axios.post(MAKE_COMMENT,{message:comment,ventId:ventId,post:selectedPostId}, {withCredentials:true})
+      if(response.status===200){
+        console.log("working and made comment")
+        callPosts()
+      }
+    } catch (error) {
+      alert(error,"in making comment")
+
+    }
   }
   const callPosts=async()=>{
     try {
@@ -41,9 +50,9 @@ const PublicCard = () => {
         Top Thoughts
       </h1>
 
-      {posts.map((event) => (
+      {posts.map((event,index) => (
         <motion.div
-          key={event.VENT_ID}
+          key={event._id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -66,7 +75,7 @@ const PublicCard = () => {
             <div className="flex flex-col gap-2">
               {event.Comments.slice(0, 3).map((cmt, idx) => (
                 <motion.div
-                  key={idx}
+                  key={cmt._id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: idx * 0.1 }}
@@ -75,8 +84,8 @@ const PublicCard = () => {
                   <div className="w-8 h-8 rounded-full bg-gray-500 flex-shrink-0"></div>
                   <div>
                     <span className="font-semibold">{cmt.user}</span>{" "}
-                    <span className="text-gray-300">{cmt.text}</span>
-                    <div className="text-xs text-gray-400 mt-1">{cmt.time}</div>
+                    <span className="text-gray-300">{cmt.message}</span>
+                    <div className="text-xs text-gray-400 mt-1">{cmt.message}</div>
                   </div>
                 </motion.div>
               ))}
@@ -123,7 +132,7 @@ const PublicCard = () => {
                 <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
                   {selectedPost.Comments.map((cmt, idx) => (
                     <div
-                      key={idx}
+                      key={cmt._idx}
                       className="flex items-start gap-3 justify-between"
                     >
                       {/* Avatar + Comment */}
@@ -131,7 +140,7 @@ const PublicCard = () => {
                         <div className="w-9 h-9 rounded-full bg-gray-500 flex-shrink-0"></div>
                         <div>
                           <span className="font-semibold">{cmt.user}</span>{" "}
-                          <span className="text-gray-300">{cmt.text}</span>
+                          <span className="text-gray-300">{cmt.message}</span>
                           <div className="text-xs text-gray-400 mt-1">
                             {cmt.time}
                           </div>
@@ -153,7 +162,7 @@ const PublicCard = () => {
              <div  className="flex flex-row gap-4"  >
                <button
                className="mt-6 w-full bg-purple-900 hover:bg-purple-700 py-2 rounded-lg shadow-lg transition"
-               onClick={e=>addComment(comment)}
+               onClick={e=>addComment(comment,selectedPost._id)}
               >
                 Commment
               </button>
