@@ -11,6 +11,7 @@ import FlippingBook from "./Components/FlippingBook"
 import Public from './Pages/Public'
 import Preference from "./Pages/Preference"
 import MyProfile from './Pages/MyProfile'
+import AboutUs from './Pages/AboutUs'
 
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path={'/public'} element={<ProtectedRoute component={Public} />} />
           <Route path={"/preferences"} element={<Preference />} />
           <Route path={"/profile"} element={<MyProfile />} />
+          <Route path={"/about"} element={<AboutUs/>} />
           <Route path={'*'} element={<Home />} />
         
         </Routes>

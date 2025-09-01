@@ -1,7 +1,15 @@
 import React from "react";
 import { Card } from "@/Components/ui/Card"; // adjust path if needed
 
-export default function FeatureCard({ title, description, icon: Icon, color, className = "", onClick,variant = "default"}) {
+export default function FeatureCard({ 
+  title, 
+  description, 
+  icon: Icon, 
+  color, 
+  className = "", 
+  onClick, 
+  variant = "default"
+}) {
   const colorVariants = {
     ai: "from-green-600 via-green-900 to-green-900 hover:border-green-400",
     journal: "from-purple-600 via-purple-900 to-purple-900 hover:border-purple-400",
@@ -43,20 +51,27 @@ export default function FeatureCard({ title, description, icon: Icon, color, cla
         group relative overflow-hidden cursor-pointer
         bg-gradient-to-br ${colorVariants[color]}
         border rounded-2xl p-6
-        hover:scale-[1.02] transition-all duration-500 ease-out
+        backdrop-blur-md bg-white/5
+        hover:scale-[1.03] hover:-rotate-1 hover:translate-y-[-2px]
+        hover:shadow-[0_0_20px_rgba(139,92,246,0.6)]
+        transition-all duration-500 ease-out
         ${className}
       `}
     >
       <div className={`h-full flex flex-col items-center justify-center text-center ${sizes.spacing}`}>
         
-        {/* Icon with glow */}
+        {/* Icon with animated glow */}
         <div className="relative flex items-center justify-center">
-          <div className={`absolute inset-0 rounded-full blur-2xl opacity-20 ${iconColors[color]} bg-current`} />
+          <div className={`absolute inset-0 rounded-full blur-2xl opacity-20 ${iconColors[color]} bg-current animate-glow`} />
           <Icon className={`relative ${sizes.icon} ${iconColors[color]} group-hover:scale-110 transition-transform duration-300`} />
         </div>
         
-        {/* Title */}
-        <h3 className={`${sizes.title} font-semibold text-white group-hover:text-white transition-colors duration-300`}>
+        {/* Title with gradient hover effect */}
+        <h3 className={`${sizes.title} font-semibold text-white 
+                        group-hover:bg-gradient-to-r 
+                        group-hover:from-purple-200 group-hover:to-pink-400 
+                        group-hover:bg-clip-text group-hover:text-transparent 
+                        transition-colors duration-500`}>
           {title}
         </h3>
         
