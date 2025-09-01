@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import { MAKE_POST_CALL } from "@/API/apicalls";
+import { MAKE_POST_CALL,MAKE_COMMENT } from "@/API/apicalls";
+import { useAppStore } from "@/Storage/store";
 
 const PublicCard = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [posts, setposts] = useState([])
+  const [comment,setComment]=useState("")
+  const ventId=useAppStore(state=>state.user.ventId)
 
-
+  const addComment=async(comment)=>{
+    const response=await  axios.post(MAKE_COMMENT,{comment:comment,ventId:ventId})
+  }
   const callPosts=async()=>{
     try {
       const response=await axios.get(MAKE_POST_CALL,{withCredentials:true}) 
@@ -141,6 +146,17 @@ const PublicCard = () => {
                   ))}
                 </div>
               </div>
+              <input name="" id="" value={comment} placeholder="Enter your Comment..."
+              className="mt-6 w-full border-b-3"
+              onChange={e=>setComment(e.target.value)}
+              ></input>
+             <div  className="flex flex-row gap-4"  >
+               <button
+               className="mt-6 w-full bg-purple-900 hover:bg-purple-700 py-2 rounded-lg shadow-lg transition"
+               onClick={e=>addComment(comment)}
+              >
+                Commment
+              </button>
 
               {/* Close Button */}
               <button
@@ -149,6 +165,7 @@ const PublicCard = () => {
               >
                 Close
               </button>
+             </div>
             </motion.div>
           </motion.div>
         )}
