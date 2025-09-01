@@ -22,9 +22,9 @@ export default function Content() {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-800/30 to-transparent pointer-events-none" />
 
         {/* Floating Calm Icons in Background */}
-        <Shield className="absolute top-52 left-16 text-purple-500/20 w-14 h-14 animate-float-slow" />
-        <Heart className="absolute bottom-16 right-20 text-pink-400/20 w-16 h-16 animate-float-delayed" />
-        <Users className="absolute top-24 right-32 text-indigo-400/20 w-20 h-20 animate-float-slow" />
+        <Shield className="absolute top-52 left-16 text-purple-500/20 w-10 h-10 animate-float-slow" />
+        <Heart className="absolute bottom-16 right-20 text-pink-400/20 w-10 h-10 animate-float-delayed" />
+        <Users className="absolute top-24 right-32 text-indigo-400/20 w-10 h-10 animate-float-slow" />
 
         <h1 className="relative text-4xl md:text-6xl font-bold mt-8 leading-snug animate-fade-in text-amber-100">
           Express Yourself <br />
@@ -43,7 +43,7 @@ export default function Content() {
         <button
           className="mt-5 text-lg font-medium rounded-full px-8 py-3 
                     bg-purple-700/70 hover:bg-purple-600 transition shadow-xl hover:shadow-purple-500/40 
-                    animate-pop"
+                    animate-pop cursor-pointer"
           onClick={scrollToDiscover}
         >
           Start Your Journey

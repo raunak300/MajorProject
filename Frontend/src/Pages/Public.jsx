@@ -5,7 +5,7 @@ import Sidebar from '@/Components/Sidebar';
 
 const Public = () => {
   return (
-    <div className="bg-gradient-to-b from-zinc-900 to-purple-950 min-h-screen font-sans antialiased text-gray-100">
+    <div className="bg-gradient-to-b bg-zinc-900  min-h-screen font-sans antialiased text-gray-100">
       
       {/* Navigation - Always visible */}
       <Nav />
