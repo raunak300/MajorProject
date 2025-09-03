@@ -3,7 +3,7 @@ import { useAppStore } from '@/Storage/store'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { LOGOUT_API } from '@/API/apicalls'
-import { useAppStore } from '@/Storage/store'
+
 const ClickBar = () => {
   const Navigate = useNavigate()
   const user=useAppStore(state=>state.user)
@@ -32,7 +32,7 @@ const ClickBar = () => {
   }
 
   async function myProfileSetup(){
-
+    Navigate('/profile')
   }
 
   return (
@@ -40,7 +40,7 @@ const ClickBar = () => {
                     bg-purple-900/90 text-white rounded-lg shadow-lg 
                     w-48 animate-fade-in'>
       <button className="w-full text-left px-2 py-2 hover:bg-purple-700 rounded-md transition-all duration-200 cursor-pointer hover:scale-105"
-      onClick={() => myProfileSetup()}>
+      onClick={() => Navigate('/profile')}>
         My Profile
       </button>
 
