@@ -8,8 +8,7 @@ const CommentSchema = new mongoose.Schema({
     required:true
   },
   ventId: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
+    type: String, 
     required: true
   },
   message: {

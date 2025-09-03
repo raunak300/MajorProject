@@ -1,7 +1,7 @@
 
 const Post=require('../Model/UserPost');
 const User=require('../Model/UserModule');
-
+const Comment=require('../Model/UserComment')
 const makePost=async(req,res)=>{
     
     const {title,description,tag,ventId}=req.body
@@ -34,8 +34,14 @@ const sendPost=async(req,res)=>{
         const tag=user.Tags;
         console.log(tag);
         const posts = await Post.find({ Tag: { $in: user.Tags } })
-                        .sort({ createdAt: -1 })
-                        .limit(100);
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .populate({
+        path: "Comments",
+        populate: { path: "ventId", select: "username" } // fetch comment.user (username)
+      })
+      .populate("userId", "username") // optional: fetch post author username
+      .exec();
         console.log(posts)
         res.status(200).send({message:"Post Collected",AllPost:posts})
         
@@ -44,4 +50,29 @@ const sendPost=async(req,res)=>{
     }
 }
 
-module.exports={makePost,sendPost}
+const postComment=async(req,res)=>{
+    const ventId=req.ventId
+    const {post,message}=req.body;
+    try {
+        const user=await User.findOne({ventId:ventId})
+        const UPost=await Post.findOne({_id :post })
+        if(!user || !UPost)return res.status(404).send({message:"invalid user"})
+        const comment= new Comment({ventId:ventId, PostId:post ,message:message})
+        await comment.save()
+UPost.Comments.push(comment._id);
+        await UPost.save();
+        const updatedPost = await Post.findById(post)
+      .populate({
+        path: "Comments",
+        populate: { path: "ventId", select: "username" } // populates user details
+      });
+        res.status(200).send({message:updatedPost})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message:error})
+    }
+
+}
+
+module.exports={makePost,sendPost,postComment}

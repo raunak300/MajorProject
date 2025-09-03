@@ -10,6 +10,7 @@ const createAuthSlice = (set) => ({
 const userData = (set) => ({
   user: {
     ventId: null,
+    connections:[1,2,3]
   },
   setUserData: (data) =>
     set((state) => ({
@@ -22,6 +23,7 @@ const userData = (set) => ({
     set({
       user: {
         ventId: null,
+        connections:[]
       },
     }),
 })
@@ -32,9 +34,14 @@ const createAIChatSlice = (set) => ({
   addChat: (chat) => set((state) => ({ chats: [...state.chats, chat] })),
 });
 
-const createComment = (set) => ({
-  comments: [],
-  addComments: (comments) => set((state) => ({ comments: [...state.comments, comments] }))
+const createPrivateRoom=(set)=>({
+  room:{
+    roomId:null,
+    roomOwner: null,
+  },
+  setRoom:(roomId,ventId)=>set((state)=>({room:{roomId:roomId, roomOwner:ventId}})),
+  clearRoom:()=>set({room:{roomId:null , roomOwner:null}})
+
 })
 
 // ✅ Combine all slices in one store
@@ -44,7 +51,7 @@ export const useAppStore = create()(
       ...createAuthSlice(set, get),
       ...userData(set, get),
       ...createAIChatSlice(set, get),
-      ...createComment(set, get),
+      ...createPrivateRoom(set, get),
       // add more slices here
     }),
     { name: "app-storage" } // persists in localStorage

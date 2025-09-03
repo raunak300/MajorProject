@@ -10,7 +10,19 @@ const PublicCard = () => {
   const [comment, setComment] = useState("");
   const ventId = useAppStore((state) => state.user.ventId);
 
-  const addComment = async (comment) => {
+  const addComment=async(comment,selectedPostId)=>{
+    try {
+      const response=await  axios.post(MAKE_COMMENT,{message:comment,ventId:ventId,post:selectedPostId}, {withCredentials:true})
+      if(response.status===200){
+        console.log("working and made comment")
+        callPosts()
+      }
+    } catch (error) {
+      alert(error,"in making comment")
+
+    }
+  }
+  const callPosts=async()=>{
     try {
       await axios.post(MAKE_COMMENT, { comment: comment, ventId: ventId });
     } catch (error) {
@@ -50,9 +62,9 @@ const PublicCard = () => {
         Top Thoughts
       </h1>
 
-      {posts.map((event) => (
+      {posts.map((event,index) => (
         <motion.div
-          key={event.VENT_ID}
+          key={event._id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -77,22 +89,25 @@ const PublicCard = () => {
           <div className="relative border-t border-purple-500/20 pt-4 mt-4">
             <div className="font-semibold text-gray-400 text-sm mb-3">
               Comments ({event.Comments?.length})
+              {
+                event.Comments.length!==0 ? console.log(event.Comments) : <div></div>
+              }
             </div>
-            <div className="flex flex-col gap-3">
-              {event.Comments.slice(0, 2).map((cmt, idx) => (
+            <div className="flex flex-col gap-2">
+              {event.Comments.slice(0, 0).map((cmt, idx) => (
+               
                 <motion.div
-                  key={idx}
+                  key={cmt._id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
                   className="flex items-start gap-3"
                 >
-                  
-                  {/* Text */}
-                  <div className="text-sm leading-snug">
-                    <span className="font-semibold text-white">{cmt.user}</span>{" "}
-                    <span className="text-gray-300">{cmt.text}</span>
-                    <div className="text-xs text-gray-500 mt-0.5">{cmt.time}</div>
+                  {/* <div className="w-8 h-8 rounded-full bg-gray-500 flex-shrink-0"></div> */}
+                  <div>
+                    <span className="font-semibold">{cmt.ventId}</span>{" "}
+                    {/* <span className="text-gray-300">{cmt.message}</span> */}
+                    <div className="text-xs text-gray-400 mt-1">{cmt.message}</div>
                   </div>
                 </motion.div>
               ))}
@@ -131,29 +146,26 @@ const PublicCard = () => {
               {/* Glow Behind Modal */}
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 blur-3xl opacity-30 rounded-3xl pointer-events-none"></div>
 
-              <div className="relative">
-                {/* Post Header */}
-                <h2 className="text-2xl font-bold text-purple-200 mb-2">
-                  {selectedPost.Title}
-                </h2>
-                <p className="text-gray-300 mb-6">{selectedPost.Description}</p>
-
-                {/* Comments */}
-                <div className="border-t border-purple-500/30 pt-4">
-                  <div className="font-semibold text-gray-300 mb-3">
-                    All Comments ({selectedPost.Comments?.length})
-                  </div>
-
-                  {/* ALL Comments */}
-                  <div className="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scroll">
-                    {selectedPost.Comments.map((cmt, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        
-                        {/* Content */}
-                        <div className="text-sm leading-snug">
-                          <span className="font-semibold text-white">{cmt.user}</span>{" "}
-                          <span className="text-gray-300">{cmt.text}</span>
-                          <div className="text-xs text-gray-500 mt-0.5">{cmt.time}</div>
+              {/* Comments with small Connect buttons */}
+              <div className="border-t border-purple-500/50 pt-4">
+                <div className="font-semibold text-gray-300 mb-3">
+                  All Comments ({selectedPost.Comments?.length})
+                </div>
+                <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
+                  {selectedPost.Comments.map((cmt, idx) => (
+                    <div
+                      key={cmt._idx}
+                      className="flex items-start gap-3 justify-between"
+                    >
+                      {/* Avatar + Comment */}
+                      <div className="flex gap-3">
+                        <div className="w-9 h-9 rounded-full bg-gray-500 flex-shrink-0"></div>
+                        <div>
+                          <span className="font-semibold">{cmt.ventId}</span>{" "}
+                          <span className="text-gray-300">{cmt.message}</span>
+                          <div className="text-xs text-gray-400 mt-1">
+                            {cmt.time}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -187,6 +199,26 @@ const PublicCard = () => {
                   </button>
                 </div>
               </div>
+              <input name="" id="" value={comment} placeholder="Enter your Comment..."
+              className="mt-6 w-full border-b-3"
+              onChange={e=>setComment(e.target.value)}
+              ></input>
+             <div  className="flex flex-row gap-4"  >
+               <button
+               className="mt-6 w-full bg-purple-900 hover:bg-purple-700 py-2 rounded-lg shadow-lg transition"
+               onClick={e=>addComment(comment,selectedPost._id)}
+              >
+                Commment
+              </button>
+
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="mt-6 w-full bg-purple-900 hover:bg-purple-700 py-2 rounded-lg shadow-lg transition"
+              >
+                Close
+              </button>
+             </div>
             </motion.div>
           </motion.div>
         )}
