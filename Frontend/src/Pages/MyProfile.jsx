@@ -3,8 +3,10 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Edit3, LogOut } from "lucide-react";
+import { useAppStore } from "@/Storage/store";
 
 const MyProfile = () => {
+  const user=useAppStore(state=>state.user)
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1a0f2e] to-black text-white">
       {/* Top section */}
@@ -12,14 +14,14 @@ const MyProfile = () => {
         <div className="flex items-center gap-6">
           {/* Avatar */}
           <Avatar className="w-28 h-28">
-            <AvatarImage src="/profile.png" alt="User Avatar" />
+            <AvatarImage src="/panda.png" alt="User Avatar" />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
 
           {/* User Info */}
           <div className="flex-1">
             <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-bold">VentID_12345</h2>
+              <h2 className="text-2xl font-bold">{user.ventId}</h2>
               
               <Button size="sm" variant="outline" className="bg-purple-700 text-white">
                 <LogOut className="mr-2 h-4 w-4" /> Logout
@@ -28,9 +30,7 @@ const MyProfile = () => {
 
             {/* Stats */}
             <div className="flex gap-6 mt-3 text-gray-300">
-              <span><b>25</b> Posts</span>
-              <span><b>120</b> Connections</span>
-              <span><b>15</b> Journals</span>
+              <span><b>{user.connections?.length  ||  '0'}</b> Connections</span>
             </div>
 
             {/* Bio */}
@@ -42,10 +42,10 @@ const MyProfile = () => {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 max-w-4xl mx-auto"></div>
+      {/* <div className="border-t border-gray-700 max-w-4xl mx-auto"></div>
 
       {/* Posts Grid */}
-      <div className="max-w-4xl mx-auto px-4 py-6 grid grid-cols-3 gap-4">
+      {/* <div className="max-w-4xl mx-auto px-4 py-6 grid grid-cols-3 gap-4">
         {[...Array(9)].map((_, i) => (
           <Card key={i} className="bg-purple-950/40 hover:scale-105 transition transform cursor-pointer">
             <CardContent className="aspect-square flex items-center justify-center text-gray-400">
@@ -53,7 +53,7 @@ const MyProfile = () => {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

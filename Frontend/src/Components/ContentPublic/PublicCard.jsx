@@ -71,9 +71,13 @@ const PublicCard = () => {
           <div className="border-t border-purple-500/50 pt-4 mt-4">
             <div className="font-semibold text-gray-300 mb-3">
               Comments ({event.Comments?.length})
+              {
+                event.Comments.length!==0 ? console.log(event.Comments) : <div></div>
+              }
             </div>
             <div className="flex flex-col gap-2">
-              {event.Comments.slice(0, 3).map((cmt, idx) => (
+              {event.Comments.slice(0, 0).map((cmt, idx) => (
+               
                 <motion.div
                   key={cmt._id}
                   initial={{ opacity: 0, x: -10 }}
@@ -81,10 +85,10 @@ const PublicCard = () => {
                   transition={{ duration: 0.3, delay: idx * 0.1 }}
                   className="text-sm flex items-start gap-2"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gray-500 flex-shrink-0"></div>
+                  {/* <div className="w-8 h-8 rounded-full bg-gray-500 flex-shrink-0"></div> */}
                   <div>
-                    <span className="font-semibold">{cmt.user}</span>{" "}
-                    <span className="text-gray-300">{cmt.message}</span>
+                    <span className="font-semibold">{cmt.ventId}</span>{" "}
+                    {/* <span className="text-gray-300">{cmt.message}</span> */}
                     <div className="text-xs text-gray-400 mt-1">{cmt.message}</div>
                   </div>
                 </motion.div>
@@ -139,7 +143,7 @@ const PublicCard = () => {
                       <div className="flex gap-3">
                         <div className="w-9 h-9 rounded-full bg-gray-500 flex-shrink-0"></div>
                         <div>
-                          <span className="font-semibold">{cmt.user}</span>{" "}
+                          <span className="font-semibold">{cmt.ventId}</span>{" "}
                           <span className="text-gray-300">{cmt.message}</span>
                           <div className="text-xs text-gray-400 mt-1">
                             {cmt.time}

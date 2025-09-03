@@ -12,6 +12,7 @@ import Public from './Pages/Public'
 import Preference from "./Pages/Preference"
 import MyProfile from './Pages/MyProfile'
 import AboutUs from './Pages/AboutUs'
+import Private from './Pages/Private'
 
 
 
@@ -52,6 +53,7 @@ function App() {
           <Route path={'/public'} element={<ProtectedRoute component={Public} />} />
           <Route path={"/preferences"} element={<Preference />} />
           <Route path={"/profile"} element={<MyProfile />} />
+          <Route path={'/private'} element={<Private/>} />
           <Route path={"/about"} element={<AboutUs/>} />
           <Route path={'*'} element={<Home />} />
         
