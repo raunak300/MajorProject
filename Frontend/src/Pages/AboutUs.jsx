@@ -1,10 +1,12 @@
 // AboutUs.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, Heart, Brain, MessageCircle, Feather, Star, Laugh, UserX } from "lucide-react";
-
+import { Users, Heart, Brain, MessageCircle, Feather, Star, Laugh, UserX, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutUs() {
+  const navigate = useNavigate();
+
   const floatingIcons = [
     { icon: Heart, color: "text-pink-400", size: 50, top: "20%", left: "10%", duration: 8 },
     { icon: MessageCircle, color: "text-blue-400", size: 45, top: "35%", left: "85%", duration: 10 },
@@ -17,7 +19,15 @@ export default function AboutUs() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-zinc-950 to-gray-900 overflow-hidden text-white">
-      
+       {/* Home Button */}
+      <button
+        onClick={() => navigate("/")}
+        className="absolute top-4 left-4 z-50 p-2 rounded-full 
+                  bg-purple-900 hover:bg-purple-600 text-white shadow-lg transition cursor-pointer"
+      >
+        <Home size={22} />
+      </button>
+
       {/* Floating Emotion Icons */}
       {floatingIcons.map((item, i) => (
         <motion.div
@@ -31,6 +41,7 @@ export default function AboutUs() {
           <item.icon size={item.size} />
         </motion.div>
       ))}
+      
 
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-19">
@@ -101,8 +112,12 @@ export default function AboutUs() {
           whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(139,92,246,0.6)" }}
           whileTap={{ scale: 0.95 }}
           className="mt-10 px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-lg shadow-lg"
+        onClick={() => {
+          navigate("/");
+        }}
         >
           Share Your Story
+          
         </motion.button>
       </section>
     </div>
