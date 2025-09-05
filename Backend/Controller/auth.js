@@ -20,7 +20,7 @@ const signup = async (req, res) => {
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             secure: process.env.NODE_ENV === "production"
         });
-        return res.status(201).send("User Created succesfully");
+        return res.status(201).send({message:"User Created Successfully", user:{ventId:user.ventId,connections:user.connections}});
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error signup" })
     }
@@ -49,8 +49,8 @@ const login = async (req, res) => {
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             secure: process.env.NODE_ENV === "production"
         });
-        res.status(200).send({ message: "user exist" })
-        return;
+        return res.status(200).send({message:"User  Found", user:{ventId:user.ventId,connections:user.connections}});
+        
 
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error login" })
@@ -63,7 +63,10 @@ const verify = async (req, res) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        res.status(200).send({ valid: true, id: decoded.id, ventId:decoded.ventId }); // send user info if needed
+        const user=await User.findOne({ventId:decoded.ventId});
+        if(!user) return res.status(401).send({valid:false})
+        
+        res.status(200).send({ valid: true, id: decoded.id, ventId:decoded.ventId, connections:user.connections  }); // send user info if needed
     } catch (err) {
         res.status(401).send({ valid: false, message: "Invalid token" });
     }

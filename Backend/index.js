@@ -25,6 +25,8 @@ const tagRoutes=require('./Router/userTags.js')
 app.use('/user',tagRoutes)
 const moveRouter = require('./Router/moveRouter.js')
 app.use('/user',moveRouter)
+const connectRoutes=require('./Router/connectRoutes.js')
+app.use('/user',connectRoutes)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server running on port: ${process.env.PORT}`);

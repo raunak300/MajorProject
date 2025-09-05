@@ -13,3 +13,5 @@ export const PREFERENCE_API = `${HOST}/user/take-preference`;
 
 export const MAKE_POST_CALL= `${HOST}/post/public/page`
 export const MAKE_COMMENT=`${HOST}/post/public/comment`
+
+export const MAKE_CONNECT_REQUEST= `${HOST}/user/connect/request`

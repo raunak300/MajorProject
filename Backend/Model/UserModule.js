@@ -2,6 +2,14 @@ const mongoose=require('mongoose');
 
 const bcrypt=require('bcrypt');
 
+const ConnectionSchema = new mongoose.Schema(
+  {
+    id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    status: { type: String, enum: ["pending", "connected", "rejected"] },
+  },
+  { _id: false } // disable subdocument _id
+);
+
 const UserSchema=new mongoose.Schema({
     ventId :{
         type:String,
@@ -13,7 +21,8 @@ const UserSchema=new mongoose.Schema({
     },Tags:{
         type:[String],
         default:[]
-    }
+    },
+    connections: { type: [ConnectionSchema], default: [] }
 
 })
 
@@ -26,4 +35,5 @@ UserSchema.pre('save', async function (next) {
 
 
 const User=mongoose.model('User',UserSchema);
+//const Connections=mongoose.model('Connections',ConnectionSchema)
 module.exports=User;

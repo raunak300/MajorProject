@@ -8,6 +8,7 @@ import { useAppStore } from "@/Storage/store";
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [ventId, setventId] = useState("");
+  const [connections, setconnections] = useState([])
   const [pass, setpass] = useState("");
   const [repass, setrepass] = useState("")
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const AuthPage = () => {
           { withCredentials: true }
         )
         if (req.status === 201) {
-          setUserData({ ventId: ventId});
+          setUserData({ ventId: ventId, connections:req.data.user.connections});
           checkLoggedIn(true);
           alert("Signup Done");
           navigate('/preferences');
@@ -68,7 +69,7 @@ const AuthPage = () => {
         )
         if (req.status === 200) {
           checkLoggedIn(true);
-          setUserData({ ventId: ventId})
+         setUserData({ ventId: ventId, connections:req.data.user.connections});
           alert("Login Done");
           navigate('/')
         }

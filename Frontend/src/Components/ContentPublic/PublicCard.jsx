@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import { MAKE_POST_CALL, MAKE_COMMENT } from "@/API/apicalls";
+import { MAKE_POST_CALL, MAKE_COMMENT,MAKE_CONNECT_REQUEST } from "@/API/apicalls";
 import { useAppStore } from "@/Storage/store";
 
 const PublicCard = () => {
@@ -40,9 +40,22 @@ const PublicCard = () => {
     }
   };
 
+  const sendRequest=async (othId)=>{
+    try {
+      const response= await axios.post(MAKE_CONNECT_REQUEST, {ventId,othId}, {withCredentials:true})
+      if(response.status===200){
+        alert("Request Sent");
+      }
+    } catch (error) {
+      alert("Error in Sending Request"+ error )
+    }
+  }
+
   useEffect(() => {
     callPosts();
   }, []);
+
+
 
   const truncateText = (text, maxLength = 120) => {
     if (text.length <= maxLength) return text;
@@ -144,14 +157,35 @@ const PublicCard = () => {
                       key={cmt._id}
                       className="flex items-start gap-3 justify-between"
                     >
-                      <div className="flex gap-3">
-                        <div className="w-9 h-9 rounded-full bg-gray-500 flex-shrink-0"></div>
-                        <div>
-                          <span className="font-semibold">{cmt.ventId}</span>{" "}
+                      <div className="flex gap-3 ">
+                        <div className="flex flex-row gap-15  justify-between ">
+                         <div>
+                           <span className="font-semibold">{cmt.ventId}</span>{" "}
                           <span className="text-gray-300">{cmt.message}</span>
                           <div className="text-xs text-gray-400 mt-1">
                             {cmt.time}
                           </div>
+                         </div>
+                          
+
+                          {
+                            (cmt.status==='pending' || cmt.stauts==='rejected' || cmt.status==='connected' ) ? 
+                            (
+                              <div>
+                                <button>
+                                  {cmt.status}
+                                </button>
+                              </div>
+                            )
+                            
+                            : 
+                           ( <button className="bg-purple-500/50 rounded-md p-2 border-purple-500/20 " 
+                            onClick={()=>sendRequest(cmt.ventId)}
+                          >Connect
+                          </button>)
+
+                            
+                          }
                         </div>
                       </div>
                     </div>

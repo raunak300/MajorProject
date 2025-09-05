@@ -10,7 +10,7 @@ const createAuthSlice = (set) => ({
 const userData = (set) => ({
   user: {
     ventId: null,
-    connections:[1,2,3]
+    connections:[]
   },
   setUserData: (data) =>
     set((state) => ({

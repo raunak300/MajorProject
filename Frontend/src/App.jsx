@@ -28,9 +28,10 @@ function App() {
       });
       if (res.data.valid) {
         setLogged(true); // update Zustand store
-        setUserData({ ventId: res.data.ventId });
+        setUserData({ ventId: res.data.ventId, connections:res.data.connections });
       } else {
         setLogged(false);
+        clearUserData();
         
       }
     } catch (err) {

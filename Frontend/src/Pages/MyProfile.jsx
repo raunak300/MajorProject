@@ -40,7 +40,25 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-
+      <div>
+        {user.connections && user.connections.lneght>0
+          ?
+          ( <div>
+            {
+              user.connections.map((friends,idx)=>{
+                <div key={idx} >
+                  {friends}
+                </div>
+              })
+            }
+          </div> )
+          :
+          ( <div>
+            No User Exist
+          </div>
+         )
+        }
+      </div>
       {/* Divider */}
       {/* <div className="border-t border-gray-700 max-w-4xl mx-auto"></div>
 
